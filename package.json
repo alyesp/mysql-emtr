@@ -4,13 +4,17 @@
   "description": "",
   "main": "employeeMG.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node employeeTracker.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chalk": "^5.0.1",
+    "console.table": "^0.10.0",
     "dotenv": "^16.0.2",
+    "figlet": "^1.5.2",
     "inquirer": "^9.1.2",
     "mysql2": "^2.3.3"
   }
