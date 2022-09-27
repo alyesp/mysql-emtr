@@ -2,8 +2,7 @@
 const mysql = require('mysql2');
 //interact with user by command line
 const inquirer = require ("inquirer");
-// terminal string styling
-const chalk = require('chalk');
+
 // implement FIGfont spec in Javascript
 const figlet = require('figlet');
 //dotenv for environmental variables 
@@ -15,20 +14,20 @@ const cTable = require('console.table');
 
 const db = mysql.createConnection({
   host: 'localhost',
-  port: 3001,
+  // port: 3001,
   user: 'root',
   password: process.env.DB_PASSWORD,
   database: 'employeeTracker_db'
 });
 
 // connection.connect();
-console.log(chalk.yellow.bold('======================================================================================================='));
+console.log(('======================================================================================================='));
 console.log(``);
-console.log(chalk.red.bold(figlet.textSync('EMPLOYEE TRACKER')));
+console.log((figlet.textSync('EMPLOYEE TRACKER')));
 console.log(``);
-console.log(`                               ` + chalk.green.bold('(C)ONTENT (M)ANAGEMENT (S)YSTEM'));
+console.log(`                               ` + ('(C)ONTENT (M)ANAGEMENT (S)YSTEM'));
 console.log(``);
-console.log(chalk.yellow.bold(`======================================================================================================`));
+console.log((`======================================================================================================`));
 
 // start questions
 
@@ -77,15 +76,17 @@ const start = () => {
       case 'Quit':
         db.end();
         break;
-      default:
-        throw new Error('invalid initial user choice');
+      // default:
+        // throw new Error('invalid initial user choice');
     }
   })
 };
 
+start();
+
 const viewAllEmployees = () => {
   const query = `
-  SELECT e.id, e.first_id, e.last_name, role.title, department.name, AS department, salary, IFNULL (concat(m.first_name, ' ' , m.last_name), 'N/A') AS manager
+  SELECT e.id, e.first_id, e.last_name, role.title, department.name, AS department, salary, IF NULL (concat(m.first_name, ' ' , m.last_name), 'N/A') AS manager
   FROM employee e
   LEFT JOIN employee m 
   ON m.id = e.manager_id
@@ -305,10 +306,10 @@ const udEmployeeRole = async () => {
   })
 };
 
-app.use((req, res) => {
-  res.status(404).end();
-});
+// app.use((req, res) => {
+//   res.status(404).end();
+// });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Server running on port ${PORT}`);
+// });
